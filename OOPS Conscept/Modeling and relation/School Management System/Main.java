@@ -1,94 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
-
-public class Student {
-    private String name;
-    private String studentId;
-
-    public Student(String name, String studentId) {
-        this.name = name;
-        this.studentId = studentId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getStudentId() {
-        return studentId;
-    }
-}
-
-public class Teacher {
-    private String name;
-    private String teacherId;
-
-    public Teacher(String name, String teacherId) {
-        this.name = name;
-        this.teacherId = teacherId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getTeacherId() {
-        return teacherId;
-    }
-}
-
-public class Course {
-    private String courseName;
-    private Teacher instructor;
-    private List<Student> enrolledStudents;
-
-    public Course(String courseName, Teacher instructor) {
-        this.courseName = courseName;
-        this.instructor = instructor;
-        this.enrolledStudents = new ArrayList<>();
-    }
-
-    public void enrollStudent(Student student) {
-        enrolledStudents.add(student);
-        System.out.println(student.getName() + " has been enrolled in " + courseName);
-    }
-
-    public void showEnrolledStudents() {
-        System.out.println("Students enrolled in " + courseName + ":");
-        for (Student student : enrolledStudents) {
-            System.out.println("- " + student.getName());
-        }
-    }
-
-    public Teacher getInstructor() {
-        return instructor;
-    }
-}
-
-
-
-public class School {
-    private String schoolName;
-    private List<Course> courses;
-
-    public School(String schoolName) {
-        this.schoolName = schoolName;
-        this.courses = new ArrayList<>();
-    }
-
-    public void addCourse(Course course) {
-        courses.add(course);
-        System.out.println("Course " + course.courseName + " has been added to " + schoolName);
-    }
-
-    public void showCourses() {
-        System.out.println("Courses offered by " + schoolName + ":");
-        for (Course course : courses) {
-            System.out.println("- " + course.courseName + " (Instructor: " + course.getInstructor().getName() + ")");
-        }
-    }
-}
 public class Main {
     public static void main(String[] args) {
         // Create a school
@@ -116,8 +25,8 @@ public class Main {
         scienceCourse.enrollStudent(student1); // Alice enrolls in Science
 
         // Show enrolled students for each course
-        mathCourse.showEnrolledStudents(); // Show students in Mathematics
-        scienceCourse.showEnrolledStudents(); // Show students in Science
+        mathCourse.showEnrolledStudents();
+        scienceCourse.showEnrolledStudents();
 
         // Show all courses offered by the school
         school.showCourses();
