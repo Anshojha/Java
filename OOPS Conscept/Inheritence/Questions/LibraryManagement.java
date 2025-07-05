@@ -17,7 +17,6 @@ class Book {
 class Author extends Book {
    String name;
    String bio;
-
    Author(String title, int publicationYear, String name, String bio) {
        super(title, publicationYear);
        this.name = name;
