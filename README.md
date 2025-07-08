@@ -60,3 +60,107 @@ class Node {
     int data;
     Node next;
 }
+
+
+# 📚 Stacks in Java
+
+## ✅ What is a Stack?
+
+A **Stack** is a linear data structure that follows the **LIFO** (Last In, First Out) principle.
+
+- The last element added is the first one to be removed.
+- Used when **reverse processing** is needed.
+
+---
+
+## ⚙️ Key Operations
+
+| Operation | Description |
+|----------|-------------|
+| `push(E e)` | Adds an element to the top of the stack |
+| `pop()` | Removes and returns the top element |
+| `peek()` | Returns the top element without removing it |
+| `isEmpty()` | Checks if the stack is empty |
+
+---
+
+## 💡 Use Cases of Stack
+
+- Expression evaluation (infix to postfix, prefix conversion)
+- Undo/redo functionality in text editors
+- Backtracking algorithms
+- Reversing strings or data
+- Function call stack in recursion
+
+---
+
+## 🧪 Problem: Balanced Parentheses Checker
+
+**Given a string containing brackets (`()`, `{}`, `[]`), check if it is balanced.**
+
+### ✔️ Balanced
+- Every opening bracket has a matching closing bracket.
+- Brackets are properly nested.
+
+### ❌ Unbalanced
+- Mismatched brackets.
+- Closing bracket comes without a matching open.
+- Extra open brackets remain.
+
+---
+
+## 🔍 Approach
+
+1. Create a stack.
+2. Iterate through the string:
+   - If it's an opening bracket (`(`, `{`, `[`), push it.
+   - If it's a closing bracket:
+     - If stack is empty → return false.
+     - Pop the top and check if it matches.
+3. After loop:
+   - If stack is empty → string is balanced.
+   - Else → unbalanced.
+
+---
+
+## 🧠 Algorithm
+
+```text
+1. Create a Stack
+2. For each character in the string:
+   a. If opening bracket → push to stack
+   b. If closing bracket:
+      i.  If stack is empty → return false
+      ii. Pop from stack and check if brackets match
+3. After loop → if stack is empty → return true, else false
+# 🔄 Queues in Java
+
+## 📘 What is a Queue?
+
+A **Queue** is a linear data structure that follows the **FIFO (First In, First Out)** principle — the first element added is the first to be removed.
+
+It is widely used in:
+- Scheduling processes
+- Request handling
+- Resource management
+- Graph traversal (like BFS)
+
+---
+
+## 🚀 Types of Queues in Java
+
+| Type              | Description                                                  |
+|-------------------|--------------------------------------------------------------|
+| **Simple Queue**  | Basic FIFO queue                                             |
+| **PriorityQueue** | Orders elements based on priority (natural or custom order)  |
+| **Deque**         | Double-ended queue: insert/remove from both ends             |
+
+---
+
+## ⚙️ Key Queue Operations
+
+```java
+queue.offer(element);
+queue.poll();
+queue.peek();
+queue.isEmpty();
