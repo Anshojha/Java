@@ -164,3 +164,33 @@ queue.offer(element);
 queue.poll();
 queue.peek();
 queue.isEmpty();
+```
+# 🔐 Hashing Function in Java
+
+## 📌 What is Hashing?
+
+Hashing is a technique that **converts data into a fixed-size integer value**, known as a **hash code** or **hash value**, using a **hash function**.  
+It is primarily used to enable **efficient insertion, lookup, and deletion** in data structures like `HashMap`, `HashSet`, and `Hashtable`.
+
+---
+
+## 🧠 Key Concepts
+
+### ✅ Hash Code
+- A numeric value representing the object.
+- Generated using the `hashCode()` method.
+- Used to decide **which bucket** an object should go into.
+
+### ✅ Hash Function
+- Converts an object’s data into an integer (`int`).
+- Used internally by Java collections to compute the bucket index.
+
+### ✅ Collisions
+- Occur when **different objects** return the **same hash code**.
+- Handled using:
+  - **Separate Chaining** (LinkedList or Tree inside buckets)
+  - **Open Addressing** (less common in Java)
+
+### ✅ Buckets
+- Logical slots in the hash table
+
