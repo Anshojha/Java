@@ -60,8 +60,7 @@ class Node {
     int data;
     Node next;
 }
-
-
+```
 # 📚 Stacks in Java
 
 ## ✅ What is a Stack?
@@ -133,6 +132,7 @@ A **Stack** is a linear data structure that follows the **LIFO** (Last In, First
       i.  If stack is empty → return false
       ii. Pop from stack and check if brackets match
 3. After loop → if stack is empty → return true, else false
+```
 # 🔄 Queues in Java
 
 ## 📘 What is a Queue?
