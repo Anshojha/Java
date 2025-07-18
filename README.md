@@ -194,3 +194,221 @@ It is primarily used to enable **efficient insertion, lookup, and deletion** in 
 ### ✅ Buckets
 - Logical slots in the hash table
 
+# Java Interfaces
+
+## What is an Interface?
+
+An **interface** in Java is a reference type, similar to a class, that can contain:
+- Abstract methods (no body),
+- Default methods (with implementation),
+- Static methods,
+- Constants (public static final by default).
+
+It defines a contract that implementing classes must fulfill.
+
+---
+
+## 🔹 Key Characteristics
+
+- All methods are `public` and `abstract` by default (except static/default).
+- All variables are `public static final`.
+- A class can implement multiple interfaces (supports multiple inheritance).
+- Interfaces cannot be instantiated directly.
+
+---
+
+## 🔹 Syntax
+
+```java
+interface Animal {
+    void makeSound();
+}
+```
+---
+
+## 🔹 Anonymous Classes in Java
+
+### What is an Anonymous Class?
+
+An **anonymous class** is a **local class without a name**.
+It is often used to create **one-time implementations** of interfaces or abstract classes, typically for **short-lived purposes** like event handling, thread creation, or callbacks.
+
+---
+
+### 🔹 Syntax
+
+```java
+interface Greeting {
+    void sayHello();
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Greeting g = new Greeting() {
+            public void sayHello() {
+                System.out.println("Hello from anonymous class!");
+            }
+        };
+        g.sayHello();
+    }
+}
+```
+# 📦 Java Package
+
+## 🧠 What is a Package?
+
+A **package** in Java is a namespace used to group related classes and interfaces together. It helps organize code, avoid name conflicts, and control access.
+
+---
+
+## 🏷️ Types of Packages
+
+1. **Built-in Packages**: Provided by Java API  
+   Example: `java.util`, `java.io`, `java.lang`
+
+2. **User-defined Packages**: Created by the programmer
+
+---
+
+## ✅ Benefits of Using Packages
+
+- Code **modularity** and **reusability**
+- **Namespace management**: Prevents class name conflicts
+- Access control using **public**, **protected**, **default**
+- Easier **project structure** and **maintenance**
+
+---
+
+## 🧰 Creating a Package
+
+### Step 1: Define the package in a `.java` file
+
+```java
+// File: mypackage/Message.java
+package mypackage;
+
+public class Message {
+    public void show() {
+        System.out.println("Hello from a package!");
+    }
+}
+```
+# 🧩 Java Abstract Class
+
+## 🔍 What is an Abstract Class?
+
+An **abstract class** in Java is a class that **cannot be instantiated** and may contain **abstract methods** (methods without implementation) as well as **concrete methods** (fully defined).
+
+> It's used as a base class for other classes to extend and implement specific functionality.
+
+---
+
+## 🧠 Key Points
+
+- Declared using the `abstract` keyword.
+- Can have both **abstract** and **non-abstract** methods.
+- Cannot be instantiated directly.
+- Used to define **common behavior** for all subclasses.
+
+---
+
+## 📌 Syntax
+
+```java
+abstract class Vehicle {
+    abstract void start();     // Abstract method
+    void stop() {              // Concrete method
+        System.out.println("Vehicle stopped");
+    }
+}
+```
+# ☕ Java Concepts — Polymorphism, Inner Class, and StringBuffer
+
+---
+
+## 🔁 1. Polymorphism
+
+### 🧠 Definition
+Polymorphism means **"many forms"**. In Java, it allows objects to behave differently based on their actual type, even when accessed through a common interface or superclass.
+
+### 📌 Types of Polymorphism
+
+| Type               | Description                                          |
+|--------------------|------------------------------------------------------|
+| Compile-time (Static) | Achieved using **method overloading**            |
+| Runtime (Dynamic)     | Achieved using **method overriding**             |
+
+---
+
+### ✅ Method Overloading (Compile-time)
+```java
+class MathUtils {
+    int add(int a, int b) { return a + b; }
+    double add(double a, double b) { return a + b; }
+}
+```
+# 🧬 Java Inner Classes
+
+## 🧠 What is an Inner Class?
+An **inner class** is a class defined inside another class in Java. It is associated with its outer class and can access the outer class's members (including private ones).
+
+---
+
+## ✅ Benefits of Inner Classes
+- Improves **encapsulation**
+- Groups **logically related classes**
+- Can access all members of the outer class
+- Useful for **event handling** and **callbacks**
+
+---
+
+## 🏗️ Types of Inner Classes
+
+| Type                   | Description                                                           |
+|------------------------|------------------------------------------------------------------------|
+| Member Inner Class     | Non-static class inside another class. Requires an instance of outer. |
+| Static Nested Class    | Static class inside another class. Can’t access non-static outer data. |
+| Local Inner Class      | Defined inside a method or block.                                     |
+| Anonymous Inner Class  | A one-time class defined and instantiated at once.                    |
+
+---
+
+## 🔹 1. Member Inner Class
+```java
+class Outer {
+    int x = 10;
+
+    class Inner {
+        void display() {
+            System.out.println("x = " + x);  // Access outer class member
+        }
+    }
+}
+```
+# 📚 Java Buffered Classes
+
+## 🧠 What Are Buffered Classes?
+Buffered classes in Java are used to improve the **efficiency of input and output (I/O)** operations by reducing the number of I/O calls. They use an internal buffer to temporarily hold data, making reading and writing much faster.
+
+---
+
+## 🚀 Common Buffered Classes
+
+| Class           | Package             | Purpose                                  |
+|----------------|---------------------|------------------------------------------|
+| BufferedReader  | java.io             | Reads text from a character-input stream |
+| BufferedWriter  | java.io             | Writes text to a character-output stream |
+| BufferedInputStream | java.io         | Reads binary data with buffering         |
+| BufferedOutputStream| java.io        | Writes binary data with buffering        |
+
+---
+
+## 🔹 BufferedReader
+
+### ✅ Purpose:
+Used to read characters efficiently from files, console, or any character stream.
+
+### 🧾 Constructor:
+```java
+BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+```
