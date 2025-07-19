@@ -1,3 +1,7 @@
+// class -> class = extends
+// class -> interface = implements
+// interface -> interface = extends
+
 
 interface A {
     // In interface the variales are already final and static show can't be inintalozed normally 
@@ -8,7 +12,11 @@ interface A {
 
 }
 
-class B implements A {
+interface X {
+    void Run () ;
+}
+
+class B implements A, X{
 
     public void show() {
         System.out.println("In shwo");
@@ -16,6 +24,9 @@ class B implements A {
 
     public void config() {
         System.out.println("In config");
+    }
+    public void Run () {
+        System.out.println("I am Run");
     }
 }
 
@@ -26,5 +37,8 @@ public class Demo1 {
         obj = new B();
         obj.show();
         obj.config();
+        // obj.Run();  Retrun error
+        X obj1 = new B();
+        obj1.Run();
     }
 }

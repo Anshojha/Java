@@ -412,3 +412,92 @@ Used to read characters efficiently from files, console, or any character stream
 ```java
 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 ```
+
+# 📚 Java Enum Guide
+
+## 🔰 What is an Enum?
+
+An `enum` (short for *enumeration*) is a special Java type used to define collections of constants. It provides type safety and is used when a variable can only take a predefined set of values.
+
+---
+
+## ✅ Key Features
+
+- Fixed set of constants
+- Type-safe
+- Can have fields, methods, and constructors
+- Useful in switch statements
+- Implements `java.lang.Enum`
+
+---
+
+## 🧪 Simple Example
+
+```java
+// Define enum
+enum Day {
+    MONDAY, TUESDAY, WEDNESDAY
+}
+
+// Use enum
+public class EnumDemo {
+    public static void main(String[] args) {
+        Day today = Day.MONDAY;
+
+        if (today == Day.MONDAY) {
+            System.out.println("Start of the work week!");
+        }
+    }
+}
+```
+# 📘 Java Annotations
+
+## 📌 What is an Annotation?
+
+An annotation in Java is a special form of **metadata** that provides information about the code but **does not change the program's logic**. They are used to instruct the compiler, generate code, configure frameworks, or perform runtime checks.
+
+---
+
+## ✅ Why Use Annotations?
+
+- Provide **compiler instructions**
+- Used by **frameworks** (like Spring, Hibernate)
+- Enable **code generation and configuration**
+- Help with **runtime processing** (e.g., reflection)
+
+---
+
+## 🚀 Common Built-in Annotations
+
+| Annotation         | Description                                                                 |
+|--------------------|-----------------------------------------------------------------------------|
+| `@Override`         | Indicates a method overrides a superclass method                            |
+| `@Deprecated`       | Marks a method/class as outdated                                            |
+| `@SuppressWarnings` | Tells compiler to ignore specific warnings                                  |
+| `@FunctionalInterface` | Indicates the interface contains exactly one abstract method            |
+| `@SafeVarargs`      | Suppresses unsafe operations warning for varargs methods                   |
+
+---
+
+## 🧪 Code Snippet: Using Annotations
+
+```java
+class Animal {
+    @Deprecated
+    void sound() {
+        System.out.println("Animal makes sound");
+    }
+}
+
+public class Main {
+    @Override
+    public String toString() {
+        return "Main class";
+    }
+
+    public static void main(String[] args) {
+        Animal a = new Animal();
+        a.sound();  // Warning: Deprecated method
+    }
+}
+```
