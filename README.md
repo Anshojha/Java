@@ -60,7 +60,7 @@ class Node {
     int data;
     Node next;
 }
-
+```
 
 # 📚 Stacks in Java
 
