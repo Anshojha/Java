@@ -501,3 +501,68 @@ public class Main {
     }
 }
 ```
+# Java Lambda Functions
+
+This README documents the study of Lambda Functions in Java, a key feature introduced in Java 8 for writing clean, functional-style code.
+
+## 🔍 What are Lambda Functions?
+Lambda functions (or lambda expressions) allow you to write anonymous methods in a shorter and more expressive way. They are mostly used to implement functional interfaces.
+
+### ✅ Syntax
+```java
+(parameters) -> expression
+(parameters) -> { statements; }
+
+```
+
+# 📚 Java Exception & Error Handling Guide
+
+This document covers the basics and advanced concepts of **exception** and **error handling** in Java, aimed to help learners understand and apply robust error-handling practices in their projects.
+
+---
+
+## 📌 What is an Exception?
+
+An **exception** is an unwanted or unexpected event that occurs during the execution of a program, disrupting its normal flow.
+
+Java uses a powerful mechanism to handle such situations through:
+- `try` and `catch` blocks
+- `finally` block
+- `throw` and `throws` keywords
+
+---
+
+## ⚙️ Types of Exceptions
+
+### 1. **Checked Exceptions**
+- Detected at **compile-time**
+- Must be either caught or declared using `throws`
+- **Examples**: `IOException`, `SQLException`, `FileNotFoundException`
+
+### 2. **Unchecked Exceptions**
+- Detected at **runtime**
+- Not mandatory to catch or declare
+- **Examples**: `NullPointerException`, `ArithmeticException`, `ArrayIndexOutOfBoundsException`
+
+---
+
+## 💣 What is an Error?
+
+Errors indicate serious problems that a typical application should not try to handle.
+
+- **Examples**: `OutOfMemoryError`, `StackOverflowError`
+- Belong to the `java.lang.Error` class hierarchy
+
+---
+
+## 🧪 Exception Handling Syntax
+
+```java
+try {
+    // Risky code
+} catch (ExceptionType e) {
+    // Handling code
+} finally {
+    // Always executed
+}
+```
