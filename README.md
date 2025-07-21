@@ -566,3 +566,164 @@ try {
     // Always executed
 }
 ```
+
+# Java Input Methods: Scanner vs BufferedReader
+
+This guide explains the differences between two common input methods in Java: `Scanner` and `BufferedReader`.
+
+---
+
+## 🔍 Overview
+
+Java provides multiple ways to read input from the console. The two most commonly used classes are:
+
+- `Scanner` (from `java.util`)
+- `BufferedReader` with `InputStreamReader` (from `java.io`)
+
+---
+
+## 🔄 Comparison Table
+
+| Feature                     | `Scanner`                        | `BufferedReader` + `InputStreamReader`       |
+|----------------------------|----------------------------------|----------------------------------------------|
+| ✅ Ease of Use              | Very beginner-friendly           | Slightly complex setup                       |
+| 🔄 Input Type               | Token-based                      | Line-based                                   |
+| 🔧 Data Conversion          | Built-in (`nextInt()`, etc.)     | Manual (`Integer.parseInt()`, etc.)          |
+| 🚀 Performance              | Slower for large inputs          | Faster (uses internal buffer)                |
+| 📦 Package Required         | `java.util.Scanner`              | `java.io.*`                                  |
+| 🧠 Common Use Cases         | Simple apps, learning, small input | File reading, performance-sensitive input   |
+
+---
+
+## 🧪 Example Code
+
+### ✅ Using Scanner
+
+```java
+import java.util.Scanner;
+
+public class ScannerExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int num = sc.nextInt();
+        System.out.println("You entered: " + num);
+    }
+}
+```
+
+# Java Input Handling Using BufferedReader
+
+This project demonstrates how to read input from the user in Java using `BufferedReader`, including both manual and modern approaches. It focuses on **try-with-resources**, a recommended practice for managing input streams safely and cleanly.
+
+---
+
+## 📌 Why Use BufferedReader?
+
+- It reads **text efficiently**, especially useful for reading lines of input.
+- Often used with `InputStreamReader` to take input from the console (`System.in`).
+- Faster than `Scanner` for large inputs.
+
+---
+
+## 📚 Required Imports
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Demo1 {
+    public static void main(String[] args) throws IOException {
+        int num = 0;
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new InputStreamReader(System.in));
+            num = Integer.parseInt(br.readLine());
+            System.out.println(num);
+        } finally {
+            br.close(); // Must be closed manually
+        }
+    }
+}
+```
+# 🧵 Java Threads - Complete Guide
+
+This document provides a complete overview of **threads in Java**, including how to create, manage, and synchronize threads. Threads allow a Java program to perform multiple tasks concurrently.
+
+---
+
+## 🚀 What is a Thread?
+
+A **thread** is a lightweight subprocess — the smallest unit of processing in a program. Java supports **multithreading**, which means executing multiple threads in parallel to improve application performance and responsiveness.
+
+---
+
+## 🔁 Thread Lifecycle
+
+A Java thread can be in one of the following states:
+
+1. **New** – Thread is created but not started.
+2. **Runnable** – Thread is ready to run.
+3. **Running** – Thread is executing.
+4. **Blocked/Waiting** – Thread is waiting for a resource or signal.
+5. **Terminated (Dead)** – Thread has completed or was stopped.
+
+![Thread Lifecycle](https://upload.wikimedia.org/wikipedia/commons/7/7a/Thread_life_cycle_in_Java.png)
+
+---
+
+## 🧪 Ways to Create a Thread in Java
+
+Java provides **three main ways** to create a thread:
+
+---
+
+### 1️⃣ Extending the `Thread` class
+
+```java
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread is running...");
+    }
+}
+
+public class TestThread {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start();  // Start the thread
+    }
+}
+
+```
+### 2️⃣ Implementing the Runnable interface 
+```java
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("Runnable thread is running...");
+    }
+}
+
+public class TestRunnable {
+    public static void main(String[] args) {
+        Thread t1 = new Thread(new MyRunnable());
+        t1.start();  // Start the thread
+    }
+}
+```
+
+### 3️⃣ Using Lambda Expressions (Java 8+)
+```java
+public class LambdaThread {
+    public static void main(String[] args) {
+        Thread t = new Thread(() -> {
+            System.out.println("Thread using lambda expression!");
+        });
+        t.start();  // Start the thread
+    }
+}
+```
