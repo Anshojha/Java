@@ -133,6 +133,8 @@ A **Stack** is a linear data structure that follows the **LIFO** (Last In, First
       i.  If stack is empty → return false
       ii. Pop from stack and check if brackets match
 3. After loop → if stack is empty → return true, else false
+```
+
 # 🔄 Queues in Java
 
 ## 📘 What is a Queue?
@@ -724,6 +726,359 @@ public class LambdaThread {
             System.out.println("Thread using lambda expression!");
         });
         t.start();  // Start the thread
+    }
+}
+```
+# 🚦 Java Race Condition Demo
+
+This project demonstrates how **race conditions** can occur in multithreaded environments and how to prevent them using `synchronized` methods in Java.
+
+---
+
+## 🧠 What is a Race Condition?
+
+A **race condition** occurs when two or more threads access shared data and try to change it at the same time. Since thread scheduling is unpredictable, the final result can vary and lead to incorrect behavior.
+
+### Example:
+- Two threads increment a shared counter 1000 times each.
+- Expected result: `2000`
+- Without synchronization, the actual result may be **less than 2000** due to thread interference.
+
+---
+
+## ✅ How This Code Fixes It
+
+This example uses `synchronized` in the `increment()` method to ensure that **only one thread at a time** can update the counter.
+
+```java
+public synchronized void increment() {
+    count++;
+}
+```
+# 🔄 Java Thread Lifecycle States
+
+In Java, threads go through different **lifecycle states** during their execution. Understanding these states is essential for building multithreaded applications safely and efficiently.
+
+---
+
+## 🧵 Thread States Overview
+
+| State           | Description                                                                 |
+|------------------|-----------------------------------------------------------------------------|
+| `NEW`            | The thread has been created but not yet started using `start()`.           |
+| `RUNNABLE`       | The thread is ready to run and waiting for CPU time.                       |
+| `RUNNING`        | Thread is actively executing code. (Note: In Java, this is part of `RUNNABLE`) |
+| `BLOCKED`        | The thread is waiting to acquire a monitor lock (e.g., inside a `synchronized` block). |
+| `WAITING`        | The thread is waiting indefinitely for another thread to perform an action (e.g., `wait()`, `join()` without timeout). |
+| `TIMED_WAITING`  | The thread is waiting for another thread but only for a specific time (e.g., `Thread.sleep()`, `join(timeout)`). |
+| `TERMINATED`     | The thread has completed execution or has been aborted.                    |
+
+---
+
+## 🔁 Example Lifecycle
+
+```java
+Thread t = new Thread(() -> {
+    System.out.println("Running...");
+});
+
+System.out.println(t.getState()); // NEW
+t.start();
+System.out.println(t.getState()); // RUNNABLE
+```
+# 📚 Java Collections API
+
+The **Java Collections Framework (JCF)** is a set of classes and interfaces that implement commonly reusable data structures like lists, sets, queues, and maps.
+
+---
+
+## 🧩 Why Use Collections?
+
+- Store, retrieve, and manipulate groups of objects efficiently
+- Avoid the complexity of writing your own data structures
+- Handle dynamic data (size can grow/shrink)
+
+---
+
+## 🗂️ Collection Hierarchy
+
+```text
+             Iterable
+                |
+             Collection
+     ___________|___________
+    |           |           |
+  List         Set        Queue
+                |
+              SortedSet
+```
+```java
+import java.util.*;
+
+public class ListExample {
+    public static void main(String[] args) {
+        List<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Apple"); // Allowed
+
+        System.out.println(fruits); // [Apple, Banana, Apple]
+    }
+}
+Set<String> names = new HashSet<>();
+names.add("Alice");
+names.add("Bob");
+names.add("Alice"); // Ignored
+
+System.out.println(names); // [Alice, Bob]
+Queue<String> queue = new LinkedList<>();
+queue.add("A");
+queue.add("B");
+System.out.println(queue.poll()); // A (removes head)
+List<Integer> nums = Arrays.asList(4, 2, 7);
+Collections.sort(nums);
+System.out.println(nums); // [2, 4, 7]
+
+```
+
+# 📘 Java ArrayList Collection
+
+## 🔍 What is `ArrayList`?
+
+`ArrayList` is a **resizable array implementation** of the `List` interface in Java. It allows:
+- Random access to elements using indices (like an array)
+- Dynamic resizing (it grows automatically when needed)
+- Duplicate elements
+- Insertion order is maintained
+
+---
+
+## ✅ Key Features of `ArrayList`
+
+- Belongs to the `java.util` package
+- Implements `List` interface
+- Allows duplicates
+- Maintains insertion order
+- Not synchronized (not thread-safe)
+- Supports null elements
+
+---
+
+## 🔧 Basic Operations
+
+| Operation    | Method              |
+|--------------|---------------------|
+| Add element  | `add()`              |
+| Remove element | `remove()`         |
+| Access element | `get(index)`       |
+| Replace element | `set(index, obj)` |
+| Size         | `size()`             |
+
+---
+
+## 🧪 Example Code
+
+```java
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class ArrayListCol {
+    public static void main(String[] args) {
+        // Declare a Collection of Integers using ArrayList
+        Collection<Integer> nums = new ArrayList<Integer>();
+
+        // Add elements to the list
+        nums.add(1);
+        nums.add(3);
+        nums.add(6);
+        nums.add(9);
+
+        // Loop using Object type (non-generic for-each)
+        for (Object n : nums) {
+            System.out.println(n); // Auto-unboxing from Integer to int
+        }
+
+        // Loop using int type (generics allow type-safe iteration)
+        for (int n : nums) {
+            System.out.println(n);
+        }
+
+        // Print entire list
+        System.out.println(nums);
+    }
+}
+```
+
+# 📘 Java `List` Interface - Full Guide
+
+## 🔍 What is `List`?
+
+The `List` interface in Java is a part of the `java.util` package and extends the `Collection` interface. It represents an **ordered collection (sequence)** that allows:
+
+- Duplicate elements
+- Index-based access
+- Dynamic resizing (for implementations like `ArrayList` and `LinkedList`)
+
+---
+
+## 🧰 Common Implementations
+
+| Implementation | Characteristics |
+|----------------|------------------|
+| `ArrayList`    | Fast random access, not thread-safe, resizable array |
+| `LinkedList`   | Better at frequent insertion/deletion in middle |
+| `Vector`       | Synchronized, legacy class |
+
+---
+
+## ✅ Key Features of `List`
+
+- Maintains **insertion order**
+- Allows **duplicate elements**
+- Can access elements by **index**
+- Supports **null values**
+- Allows insertion at a specific index
+- Can iterate using for-loop, iterator, stream, etc.
+
+---
+
+## 🔧 Useful `List` Methods
+
+| Method             | Description                                      |
+|--------------------|--------------------------------------------------|
+| `add(E e)`         | Adds element to end                              |
+| `add(int index, E)`| Adds element at specific index                   |
+| `addAll(Collection c)` | Adds all elements from another collection   |
+| `get(int index)`   | Returns element at index                         |
+| `remove(int index)`| Removes element at index                         |
+| `set(int index, E)`| Replaces element at index                        |
+| `contains(Object o)` | Checks if list contains an element            |
+| `indexOf(Object o)` | Returns first index of element                 |
+| `size()`           | Returns number of elements                       |
+| `clear()`          | Removes all elements                             |
+| `isEmpty()`        | Checks if list is empty                          |
+
+---
+
+## 🧪 Java Example: `List` with `ArrayList`
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListCollection {
+    public static void main(String[] args) {
+        List<Integer> l1 = new ArrayList<>();
+
+        // Adding elements
+        l1.add(1);
+        l1.add(2);
+        l1.add(3);
+        l1.add(4);
+        System.out.println("Initial List: " + l1);
+
+        // Adding at specific index
+        l1.add(2, 12);
+        System.out.println("After l1.add(2, 12): " + l1);
+
+        // Updating value
+        l1.set(1, 99);
+        System.out.println("After l1.set(1, 99): " + l1);
+
+        // Getting element
+        int element = l1.get(3);
+        System.out.println("Element at index 3: " + element);
+
+        // Removing element
+        l1.remove(0);
+        System.out.println("After l1.remove(0): " + l1);
+
+        // Searching element
+        boolean hasValue = l1.contains(99);
+        System.out.println("Contains 99? " + hasValue);
+
+        // Size
+        System.out.println("List size: " + l1.size());
+
+        // Clearing list
+        l1.clear();
+        System.out.println("After l1.clear(): " + l1);
+        System.out.println("Is list empty? " + l1.isEmpty());
+    }
+}
+```
+
+# 📘 Java Set Interface & Its Implementations
+
+## 🔍 What is a Set?
+
+A `Set` in Java is a **collection that cannot contain duplicate elements**. It models the mathematical set abstraction and is a part of the `java.util` package. The `Set` interface extends `Collection`.
+
+---
+
+## ✅ Key Features of Set
+
+- **No duplicates allowed**
+- **Unordered** (in case of `HashSet`)
+- Can store **null values** (depends on implementation)
+- Suitable for checking **presence/absence** of items
+
+---
+
+## 🔧 Common Implementations of Set
+
+| Type            | Order Maintained | Allows null | Sorted? | Performance | Unique Feature |
+|-----------------|------------------|-------------|---------|-------------|----------------|
+| `HashSet`       | ❌ No             | ✅ Yes       | ❌ No    | ✅ Fast       | Backed by HashMap |
+| `LinkedHashSet` | ✅ Yes (insertion)| ✅ Yes       | ❌ No    | ⚠️ Slightly slower | Maintains insertion order |
+| `TreeSet`       | ✅ Yes (sorted)   | ❌ No        | ✅ Yes   | ❗ Slower     | Elements auto-sorted (uses Red-Black Tree) |
+
+---
+
+## 🧪 Java Example: Set, HashSet, TreeSet, LinkedHashSet
+
+```java
+import java.util.*;
+
+public class SetExamples {
+    public static void main(String[] args) {
+        // HashSet: Unordered, allows null
+        Set<String> hashSet = new HashSet<>();
+        hashSet.add("Banana");
+        hashSet.add("Apple");
+        hashSet.add("Mango");
+        hashSet.add("Apple"); // Duplicate
+        hashSet.add(null);
+
+        System.out.println("HashSet: " + hashSet);  // Order not guaranteed
+
+        // LinkedHashSet: Maintains insertion order
+        Set<String> linkedHashSet = new LinkedHashSet<>();
+        linkedHashSet.add("Banana");
+        linkedHashSet.add("Apple");
+        linkedHashSet.add("Mango");
+        linkedHashSet.add("Apple"); // Duplicate
+        linkedHashSet.add(null);
+
+        System.out.println("LinkedHashSet: " + linkedHashSet); // Order preserved
+
+        // TreeSet: Sorted order, no nulls allowed
+        Set<String> treeSet = new TreeSet<>();
+        treeSet.add("Banana");
+        treeSet.add("Apple");
+        treeSet.add("Mango");
+        // treeSet.add(null); // ❌ Will throw NullPointerException
+
+        System.out.println("TreeSet: " + treeSet);  // Sorted alphabetically
+
+        // Common operations
+        System.out.println("Size of HashSet: " + hashSet.size());
+        System.out.println("Does HashSet contain 'Apple'? " + hashSet.contains("Apple"));
+        hashSet.remove("Banana");
+        System.out.println("HashSet after removing Banana: " + hashSet);
+        hashSet.clear();
+        System.out.println("HashSet after clear: " + hashSet);
+        System.out.println("Is HashSet empty? " + hashSet.isEmpty());
     }
 }
 ```
