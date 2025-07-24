@@ -1082,3 +1082,196 @@ public class SetExamples {
     }
 }
 ```
+# 🗺️ Java Map Interface & Its Implementations
+
+## 🔍 What is a Map?
+
+A `Map` is an **object that maps keys to values**. It cannot contain duplicate keys, and each key can map to **only one value**. The `Map` interface is part of the `java.util` package.
+
+---
+
+## ✅ Key Features of Map
+
+- Stores key-value pairs (`K -> V`)
+- **Unique keys only** (values can be duplicated)
+- Access, insert, delete in constant time (in case of `HashMap`)
+- Useful for lookup tables, dictionaries, caching, etc.
+
+---
+
+## 🔧 Common Implementations
+
+| Map Type          | Order Maintained     | Allows `null` Key | Sorted? | Performance       | Backed By          |
+|-------------------|----------------------|-------------------|---------|-------------------|--------------------|
+| `HashMap`         | ❌ No order          | ✅ One `null` key | ❌ No    | ✅ Fast (O(1))     | Hash Table         |
+| `LinkedHashMap`   | ✅ Insertion order   | ✅ One `null` key | ❌ No    | ⚠️ Slightly slower | Hash Table + List  |
+| `TreeMap`         | ✅ Sorted by key     | ❌ No null key    | ✅ Yes   | ❗ Slower (O(log n)) | Red-Black Tree     |
+
+---
+
+## 🔁 Key Map Methods
+
+| Method               | Description                                 |
+|----------------------|---------------------------------------------|
+| `put(K key, V value)`| Add or update a key-value pair              |
+| `get(K key)`         | Get value associated with a key             |
+| `containsKey(key)`   | Check if key exists                         |
+| `containsValue(value)`| Check if value exists                      |
+| `remove(key)`        | Remove entry by key                         |
+| `keySet()`           | Returns a set of all keys                   |
+| `values()`           | Returns a collection of all values          |
+| `entrySet()`         | Returns a set of key-value pairs            |
+| `clear()`            | Removes all entries                         |
+| `size()`             | Returns number of entries                   |
+| `isEmpty()`          | Checks if map is empty                      |
+
+---
+
+## 🧠 When to Use What?
+
+- Use **HashMap** for:
+  - Fast access without caring about order
+  - Lookup tables, cache, frequency maps
+
+- Use **LinkedHashMap** when:
+  - You need predictable insertion order
+
+- Use **TreeMap** when:
+  - You need sorted keys (e.g., leaderboard, range queries)
+
+---
+
+## ⚠️ Notes
+
+- `TreeMap` does **not** allow `null` keys.
+- All maps can have multiple `null` values (except `ConcurrentHashMap`).
+- Use `Map.Entry` to iterate over key-value pairs in a map:
+
+```java
+for (Map.Entry<Integer, String> entry : hashMap.entrySet()) {
+    System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+}
+```
+```java
+import java.util.*;
+
+public class MapExample {
+    public static void main(String[] args) {
+
+        // HashMap Example
+        Map<Integer, String> hashMap = new HashMap<>();
+        hashMap.put(1, "Apple");
+        hashMap.put(2, "Banana");
+        hashMap.put(3, "Cherry");
+        hashMap.put(2, "Berry"); // Overwrites value for key 2
+
+        System.out.println("HashMap: " + hashMap);
+
+        // LinkedHashMap Example
+        Map<Integer, String> linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put(1, "Apple");
+        linkedHashMap.put(2, "Banana");
+        linkedHashMap.put(3, "Cherry");
+
+        System.out.println("LinkedHashMap (maintains order): " + linkedHashMap);
+
+        // TreeMap Example
+        Map<Integer, String> treeMap = new TreeMap<>();
+        treeMap.put(3, "Cherry");
+        treeMap.put(1, "Apple");
+        treeMap.put(2, "Banana");
+
+        System.out.println("TreeMap (sorted by key): " + treeMap);
+
+        // Common operations
+        System.out.println("Value for key 1: " + hashMap.get(1));
+        System.out.println("Contains key 2? " + hashMap.containsKey(2));
+        System.out.println("Contains value 'Apple'? " + hashMap.containsValue("Apple"));
+        hashMap.remove(2);
+        System.out.println("After removing key 2: " + hashMap);
+        System.out.println("KeySet: " + hashMap.keySet());
+        System.out.println("Values: " + hashMap.values());
+        System.out.println("EntrySet: " + hashMap.entrySet());
+    }
+}
+```
+# 🚀 Java Stream API – Complete Guide
+
+The **Stream API** in Java (introduced in Java 8) is a powerful abstraction for working with sequences of data in a **declarative, functional style**.
+
+---
+
+## 🧱 What is a Stream?
+
+A **Stream** is not a data structure; it's a pipeline of operations that process data from a source (like a `List`, `Set`, or array).
+
+> Streams allow you to filter, transform (map), and collect data with ease.
+
+---
+
+## ⚙️ Intermediate Operations
+
+These are lazy operations that return a new stream and are only executed when a terminal operation is called.
+
+| Method       | Description                                              |
+|--------------|----------------------------------------------------------|
+| `filter()`   | Filters elements based on a predicate                    |
+| `map()`      | Transforms each element                                  |
+| `sorted()`   | Sorts elements (natural or with a comparator)            |
+| `distinct()` | Removes duplicate elements                               |
+| `limit(n)`   | Truncates the stream to the first `n` elements           |
+| `skip(n)`    | Skips the first `n` elements                             |
+| `peek()`     | Performs an action without modifying the stream          |
+| `flatMap()`  | Flattens nested streams/collections into a single stream |
+
+---
+
+## 🛑 Terminal Operations
+
+These operations trigger stream processing and produce a result.
+
+| Method         | Description                                                  |
+|----------------|--------------------------------------------------------------|
+| `forEach()`    | Performs an action for each element                          |
+| `collect()`    | Collects result into a `List`, `Set`, `Map`, etc.            |
+| `count()`      | Returns the number of elements                               |
+| `anyMatch()`   | Returns `true` if any element matches a given predicate      |
+| `allMatch()`   | Returns `true` if all elements match a given predicate       |
+| `noneMatch()`  | Returns `true` if no elements match a given predicate        |
+| `findFirst()`  | Returns the first element                                    |
+| `findAny()`    | Returns any element (parallel streams benefit here)          |
+| `reduce()`     | Reduces the stream to a single value (e.g., sum, product)    |
+| `min()` / `max()` | Finds minimum/maximum using a comparator                 |
+
+---
+
+## 💡 Example Usage
+
+```java
+import java.util.*;
+import java.util.stream.*;
+
+public class StreamExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(5, 3, 7, 3, 2, 8, 9, 1, 2);
+
+        // Stream pipeline
+        List<Integer> result = numbers.stream()
+            .filter(n -> n % 2 == 0)         // keep evens
+            .distinct()                      // remove duplicates
+            .sorted()                        // sort ascending
+            .collect(Collectors.toList());   // collect result
+
+        System.out.println("Even, Sorted, Unique: " + result);
+
+        // Other terminal operations
+        long count = numbers.stream().filter(n -> n > 5).count();
+        int sum = numbers.stream().reduce(0, Integer::sum);
+        Optional<Integer> first = numbers.stream().findFirst();
+
+        System.out.println("Count > 5: " + count);
+        System.out.println("Sum: " + sum);
+        first.ifPresent(val -> System.out.println("First: " + val));
+    }
+}
+```

@@ -1,5 +1,6 @@
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -31,6 +32,13 @@ public class SetCollection {
 
         for(int n : set2) {
             System.out.println(n);
+        }
+         
+        System.out.println("<------- Printing values of set using iterator -------->");
+        // On the top collections is called iterble as we can iterate and get all the vlues of the set
+        Iterator<Integer> values = set2.iterator();
+        while(values.hasNext()) {
+            System.out.println(values.next());
         }
     }
 }
