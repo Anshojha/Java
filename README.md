@@ -1275,3 +1275,223 @@ public class StreamExample {
     }
 }
 ```
+
+# 🔒 Sealed Classes in Java
+
+## 📌 What are Sealed Classes?
+
+Sealed classes (introduced in Java 15, made stable in Java 17) are a special kind of class or interface that restrict which other classes or interfaces may extend or implement them.
+
+### ✅ Why Use Sealed Classes?
+
+- Provide controlled class hierarchies
+- Improve code safety and readability
+- Enable better compiler checks and pattern matching
+- Prevent unauthorized subclassing
+
+---
+
+## 🧪 Syntax and Rules
+
+```java
+public sealed class Animal permits Dog, Cat {
+    // fields and methods
+}
+```
+# 📘 Java Concepts and Demos
+
+## 🔒 Sealed Classes in Java
+
+### What are Sealed Classes?
+
+Sealed classes (introduced in Java 15, finalized in Java 17) restrict which other classes or interfaces can extend or implement them.
+
+This helps:
+
+* Enforce tighter control over class hierarchies
+* Improve code maintainability and security
+* Enable exhaustive checks in pattern matching
+
+### Syntax
+
+```java
+public sealed class Animal permits Dog, Cat {
+    // class body
+}
+```
+
+* `sealed`: Declares the class as sealed.
+* `permits`: Lists which classes can extend this sealed class.
+
+### Rules & Constraints
+
+* Permitted subclasses must be in the same module or package.
+* Each permitted subclass must explicitly declare one of:
+
+  * `final` – cannot be extended
+  * `sealed` – continues restriction
+  * `non-sealed` – removes restriction
+
+### Subclass Options
+
+```java
+public final class Dog extends Animal {}
+public sealed class Cat extends Animal permits Lion {}
+public non-sealed class Elephant extends Animal {}
+```
+
+### Use Case Example
+
+```java
+public sealed class Vehicle permits Car, Truck, Bike {}
+
+public final class Car extends Vehicle {}
+public sealed class Truck extends Vehicle permits MiniTruck {}
+public non-sealed class Bike extends Vehicle {}
+
+public final class MiniTruck extends Truck {}
+```
+
+### Pattern Matching Example
+
+```java
+public class Main {
+    static void checkVehicle(Vehicle v) {
+        if (v instanceof Car car) {
+            System.out.println("It's a car");
+        } else if (v instanceof Bike bike) {
+            System.out.println("It's a bike");
+        } else if (v instanceof Truck truck) {
+            System.out.println("It's a truck");
+        }
+    }
+}
+```
+
+### When to Use
+
+✅ Domain-specific hierarchies (e.g. `Shape`, `Vehicle`, `Token`)
+✅ Improve pattern matching safety
+✅ Enforce architectural constraints
+
+---
+
+## 🧾 Record Classes in Java
+
+### What are Records?
+
+Records (introduced in Java 14, finalized in Java 16) are a special kind of class in Java that is ideal for modeling immutable data.
+
+A record:
+
+* Automatically provides `getters`, `toString()`, `equals()`, `hashCode()`
+* Is implicitly `final` (cannot be extended)
+* Cannot have mutable fields
+
+### Syntax
+
+```java
+record Alien(int id, String name) {}
+```
+
+This line is equivalent to writing a full class with:
+
+* private final fields
+* constructor
+* getters
+* `toString()`, `equals()`, and `hashCode()` methods
+
+### Traditional vs Record
+
+```java
+// Traditional Class (50+ lines)
+public class Alien {
+    private final int id;
+    private final String name;
+
+    public Alien(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Alien{" + "id=" + id + ", name=" + name + '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Alien alien = (Alien) obj;
+        return id == alien.id && Objects.equals(name, alien.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+}
+```
+
+```java
+// Record (1 line)
+record Alien(int id, String name) {}
+```
+
+### Custom Constructor Example
+
+You can redefine the constructor in a record to add custom logic:
+
+```java
+record Alien(int id, String name) {
+    public Alien {
+        if (id == 0) {
+            throw new IllegalArgumentException("Id cannot be zero");
+        }
+    }
+}
+```
+
+### Example Program
+
+```java
+public class RedoceDemo {
+    public static void main(String[] args) {
+        Alien a1 = new Alien(1, "Navin");
+
+        try {
+            Alien a2 = new Alien(0, "Navin"); // Will throw exception
+        } catch (IllegalArgumentException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+
+        System.out.println(a1); // Uses toString()
+
+        Alien a3 = new Alien(1, "Navin");
+        System.out.println("Comparing two objects: " + a1.equals(a3)); // true
+    }
+}
+```
+
+### Key Points
+
+* Records are great for DTOs (Data Transfer Objects)
+* Enforce immutability and reduce boilerplate
+* Cannot extend other classes, but can implement interfaces
+
+### When to Use
+
+✅ You need to store immutable data
+✅ Want concise syntax for data carriers
+✅ You don't need full class behavior or mutable fields
+
+---
