@@ -1495,3 +1495,57 @@ public class RedoceDemo {
 ✅ You don't need full class behavior or mutable fields
 
 ---
+
+
+# Java Generics Overview
+
+This repository contains an overview and explanation of **Java Generics**, covering the fundamentals, benefits, usage patterns, and advanced concepts such as wildcards and bounded type parameters.
+
+---
+
+## 📌 1. Introduction to Generics
+
+Java Generics allow developers to create **type-safe**, **reusable**, and **flexible** code using parameterized types. Instead of using raw types like `Object`, generics enable:
+
+- **Compile-time type checking**
+- **No need for explicit type casting**
+
+---
+
+## 🤔 2. Why Use Generics?
+
+- **Type Safety**: Ensures only valid data types are used, preventing `ClassCastException` at runtime.
+- **Code Reusability**: A single generic class/method can handle multiple data types.
+- **Eliminates Type Casting**: Improves readability and reduces casting.
+- **Compile-time Checking**: Errors are caught during compilation rather than at runtime.
+
+---
+
+## 🔤 Type Parameters in Generics
+
+Java uses type parameters as placeholders for actual data types. Common parameters include:
+
+| Parameter | Meaning             |
+|----------|---------------------|
+| `T`      | Type                |
+| `E`      | Element (Collections) |
+| `K`      | Key (Maps)          |
+| `V`      | Value (Maps)        |
+
+✅ Multiple type parameters can be used (e.g., `<K, V>` for key-value pairs).
+
+**Example:**
+```java
+class Box<T> {
+    private T item;
+
+    public void setItem(T item) {
+        this.item = item;
+    }
+
+    public T getItem() {
+        return item;
+    }
+}
+```
+
