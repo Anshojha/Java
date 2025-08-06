@@ -1548,4 +1548,95 @@ class Box<T> {
     }
 }
 ```
+# Java I/O Streams
 
+Java provides a rich set of I/O (Input/Output) classes to read and write data. These classes are part of the `java.io` package and are based on the concept of **streams**.
+
+A **stream** represents a sequence of data and can be used for reading from or writing to a data source or destination.
+
+---
+
+## **Types of Streams**
+In Java, streams are divided into two main categories:
+
+- **Byte Streams** → Work with binary data (8-bit bytes)  
+- **Character Streams** → Work with character data (16-bit Unicode characters)  
+
+---
+
+## **1. Character Streams**
+Character streams handle text data with proper encoding.
+
+- **FileReader** → Reads characters from a text file.  
+- **FileWriter** → Writes characters to a text file.  
+- **Use Case**: Text files with proper character encoding.
+
+---
+
+## **2. Object Streams**
+Object streams are used to serialize and deserialize Java objects (convert objects to bytes and vice versa).
+
+- **ObjectInputStream** → Reads serialized objects.  
+- **ObjectOutputStream** → Writes serialized objects.  
+- **Requirement**: Objects must implement the `Serializable` interface.
+
+---
+
+## **3. ByteArray Streams**
+Byte array streams use byte arrays as the source or destination in memory.
+
+- **ByteArrayInputStream** → Reads from a byte array.  
+- **ByteArrayOutputStream** → Writes to a byte array.  
+- **Use Case**: In-memory data manipulation (e.g., network protocols).
+
+---
+
+## **4. Buffered Streams**
+Buffered streams improve I/O performance by reducing the number of I/O operations through buffering.
+
+### **BufferedInputStream / BufferedOutputStream**
+- These are byte streams that add buffering to the underlying input and output streams.
+
+### **BufferedReader / BufferedWriter**
+- These are character streams that add buffering to the underlying reader and writer.
+
+---
+
+## **5. Reader and Writer**
+`Reader` and `Writer` are abstract classes for reading and writing character streams.
+
+### **InputStreamReader / OutputStreamWriter**
+- These classes bridge between byte streams and character streams.
+- **Use Case**: Converting bytes to characters and vice versa with a specified encoding.
+
+---
+
+## **Key Considerations**
+- **Exception Handling**: Always handle `IOException` and use try-with-resources for auto-closing streams.  
+- **Performance**: Use buffered streams for large files to minimize I/O operations.  
+- **Character Encoding**: Explicitly specify encoding (e.g., `StandardCharsets.UTF_8`) to avoid platform-dependent issues.  
+- **Decorator Pattern**: Java I/O streams can be chained (e.g., `BufferedReader` wraps `FileReader`).  
+
+---
+
+## **Best Practices**
+- Use **try-with-resources** (Java 7+) to ensure streams are closed automatically.  
+- Prefer **BufferedReader** / **BufferedWriter** for text files.  
+- Use `flush()` to force data to be written (e.g., before closing a `BufferedOutputStream`).  
+- For object serialization, declare `serialVersionUID` to manage version control.
+
+---
+
+## **Summary of Java I/O Streams**
+| Stream Type        | Class Name             | Use Case                              |
+|--------------------|-----------------------|---------------------------------------|
+| **Byte Streams**   | FileInputStream       | Reading binary data from a file       |
+|                    | FileOutputStream      | Writing binary data to a file         |
+|                    | ObjectInputStream     | Reading a serialized object           |
+|                    | ObjectOutputStream    | Writing a serialized object           |
+|                    | ByteArrayInputStream  | Reading data from a byte array        |
+|                    | ByteArrayOutputStream | Writing data to a byte array          |
+| **Character Streams** | FileReader         | Reading text data from a file         |
+|                    | FileWriter            | Writing text data to a file           |
+|                    | BufferedReader        | Reading text efficiently              |
+|                    | BufferedWriter        | Writing text efficiently              |
